@@ -1,0 +1,19 @@
+﻿apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    name: pipeline-build
+  name: pipeline-build
+  namespace: my-cicd
+spec:
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        node('nodejs') {
+          stage('build') {
+            sh 'npm --version'
+          }
+        }
+    type: JenkinsPipeline
+  triggers:
+    - type: ConfigChange
