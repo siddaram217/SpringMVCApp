@@ -1,0 +1,25 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: test-springmvc
+  namespace: test-springmvc
+  selfLink: /api/v1/namespaces/test-springmvc/services/test-springmvc
+  uid: 72a7ec35-89e0-11e9-b122-0203665c4294
+  resourceVersion: '11713968'
+  creationTimestamp: '2019-06-08T11:27:50Z'
+  labels:
+    app: test-springmvc
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: test-springmvc
+    deploymentconfig: test-springmvc
+  clusterIP: 172.30.149.231
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}

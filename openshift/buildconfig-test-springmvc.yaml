@@ -1,0 +1,42 @@
+﻿kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: test-springmvc
+  namespace: test-springmvc
+  selfLink: >-
+    /apis/build.openshift.io/v1/namespaces/test-springmvc/buildconfigs/test-springmvc
+  uid: 729e1f2f-89e0-11e9-9793-0a580a81007e
+  resourceVersion: '11713976'
+  creationTimestamp: '2019-06-08T11:27:50Z'
+  labels:
+    app: test-springmvc
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'test-springmvc:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'java:11'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/siddaram217/SpringMVCApp.git'
+  triggers:
+    - type: ImageChange
+      imageChange:
+        lastTriggeredImageID: >-
+          image-registry.openshift-image-registry.svc:5000/openshift/java@sha256:04c1e17baab94c6f4ac1b8f69a6a392878064c2c5c8835996d77767bc543d468
+    - type: ConfigChange
+  runPolicy: Serial
+status:
+  lastVersion: 1

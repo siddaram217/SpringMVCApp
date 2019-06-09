@@ -1,0 +1,94 @@
+﻿kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: test-springmvc
+  namespace: test-springmvc
+  selfLink: >-
+    /apis/apps.openshift.io/v1/namespaces/test-springmvc/deploymentconfigs/test-springmvc
+  uid: 727343fa-89e0-11e9-9793-0a580a81007e
+  resourceVersion: '11739985'
+  generation: 3
+  creationTimestamp: '2019-06-08T11:27:49Z'
+  labels:
+    app: test-springmvc
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - test-springmvc
+        from:
+          kind: ImageStreamTag
+          namespace: test-springmvc
+          name: 'test-springmvc:latest'
+        lastTriggeredImage: >-
+          image-registry.openshift-image-registry.svc:5000/test-springmvc/test-springmvc@sha256:7a99e55adc5864e4d2b70c7d4711f47ede916358a7f6ba2006ebdf7133807f9a
+    - type: ConfigChange
+  replicas: 2
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: test-springmvc
+    deploymentconfig: test-springmvc
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-springmvc
+        deploymentconfig: test-springmvc
+    spec:
+      containers:
+        - name: test-springmvc
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/test-springmvc/test-springmvc@sha256:7a99e55adc5864e4d2b70c7d4711f47ede916358a7f6ba2006ebdf7133807f9a
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+status:
+  observedGeneration: 3
+  details:
+    message: config change
+    causes:
+      - type: ConfigChange
+  availableReplicas: 2
+  unavailableReplicas: 0
+  latestVersion: 1
+  updatedReplicas: 2
+  conditions:
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2019-06-08T11:29:51Z'
+      lastTransitionTime: '2019-06-08T11:29:51Z'
+      reason: NewReplicationControllerAvailable
+      message: replication controller "test-springmvc-1" successfully rolled out
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2019-06-08T12:13:30Z'
+      lastTransitionTime: '2019-06-08T12:13:30Z'
+      message: Deployment config has minimum availability.
+  replicas: 2
+  readyReplicas: 2

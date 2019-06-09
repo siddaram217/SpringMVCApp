@@ -1,0 +1,34 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: test-springmvc
+  namespace: test-springmvc
+  selfLink: /apis/route.openshift.io/v1/namespaces/test-springmvc/routes/test-springmvc
+  uid: 72be93f9-89e0-11e9-997e-0a580a80008b
+  resourceVersion: '11713984'
+  creationTimestamp: '2019-06-08T11:27:50Z'
+  labels:
+    app: test-springmvc
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: test-springmvc-test-springmvc.apps.us-east-2.online-starter.openshift.com
+  subdomain: ''
+  to:
+    kind: Service
+    name: test-springmvc
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        test-springmvc-test-springmvc.apps.us-east-2.online-starter.openshift.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2019-06-08T11:27:50Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: apps.us-east-2.online-starter.openshift.com

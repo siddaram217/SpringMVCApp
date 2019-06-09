@@ -1,0 +1,28 @@
+﻿kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: test-springmvc
+  namespace: test-springmvc
+  selfLink: >-
+    /apis/image.openshift.io/v1/namespaces/test-springmvc/imagestreams/test-springmvc
+  uid: 72735f95-89e0-11e9-997e-0a580a80008b
+  resourceVersion: '11714815'
+  generation: 1
+  creationTimestamp: '2019-06-08T11:27:49Z'
+  labels:
+    app: test-springmvc
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: >-
+    image-registry.openshift-image-registry.svc:5000/test-springmvc/test-springmvc
+  tags:
+    - tag: latest
+      items:
+        - created: '2019-06-08T11:29:20Z'
+          dockerImageReference: >-
+            image-registry.openshift-image-registry.svc:5000/test-springmvc/test-springmvc@sha256:7a99e55adc5864e4d2b70c7d4711f47ede916358a7f6ba2006ebdf7133807f9a
+          image: >-
+            sha256:7a99e55adc5864e4d2b70c7d4711f47ede916358a7f6ba2006ebdf7133807f9a
+          generation: 1
